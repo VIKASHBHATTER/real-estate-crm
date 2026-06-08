@@ -1,0 +1,26 @@
+{
+  "name": "signature-realty-crm",
+  "version": "1.0.0",
+  "description": "Enterprise-grade Real Estate CRM and Brokerage Management Platform",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd backend && pip install -r requirements.txt && cd ../frontend && npm install && cd ../mobile && npm install",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "dev:frontend": "cd frontend && npm start",
+    "dev:mobile": "cd mobile && npm start",
+    "build": "npm run build:backend && npm run build:frontend && npm run build:mobile",
+    "build:backend": "echo 'Backend is ready for deployment'",
+    "build:frontend": "cd frontend && npm run build",
+    "build:mobile": "cd mobile && npm run build",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "db:migrate": "cd backend && alembic upgrade head",
+    "db:seed": "cd backend && python -m app.seeds.seed_data"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
